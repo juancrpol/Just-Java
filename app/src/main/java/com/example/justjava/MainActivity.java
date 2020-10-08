@@ -26,16 +26,33 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String priceMessage = "Total: $" + price;
-        priceMessage = priceMessage + "\nThank you!";
+        int price = calculatePrice();
+        String priceMessage = createOrderSummary(price);
         displayMessage(priceMessage);
+    }
+
+    /**
+     * Calculates the price of the order.
+     *
+     * @return total price.
+     */
+    private int calculatePrice() {
+        return quantity * 5;
+    }
+
+    /**
+     * @param priceOrder The total price.
+     * @return summary of order.
+     */
+    private String createOrderSummary(int priceOrder) {
+        String messageOrder = "Name: Kaptain Kunal" + "\nQuantity: " + quantity + "\nTotal: $" + priceOrder + "\nThank you!";
+        return messageOrder;
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
@@ -61,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -69,6 +86,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         quantity = quantity - 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 }
