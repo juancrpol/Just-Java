@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.NumberFormat;
-
 /**
  * This app displays an order form to order coffee.
  */
@@ -45,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
      * @return summary of order.
      */
     private String createOrderSummary(int priceOrder) {
-        String messageOrder = "Name: Kaptain Kunal" + "\nQuantity: " + quantity + "\nTotal: $" + priceOrder + "\nThank you!";
+        String messageOrder = "Name: Kaptain Kunal";
+        messageOrder += "\nQuantity: " + quantity;
+        messageOrder += "\nTotal: $" + priceOrder;
+        messageOrder += "\nThank you!";
         return messageOrder;
     }
 
@@ -58,19 +59,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
-    /**
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 
     /**
