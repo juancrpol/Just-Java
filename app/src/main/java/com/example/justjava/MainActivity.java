@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.NumberFormat;
+
 /**
  * This app displays an order form to order coffee.
  */
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + name);
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.order_summary_email_subject, name));
         intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
@@ -77,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
      * @return summary of order.
      */
     private String createOrderSummary(String name, int priceOrder, boolean addWhippedCream, boolean addChocolate) {
-        String messageOrder = "Name: " + name;
-        messageOrder += "\nAdd whipped cream? " + addWhippedCream;
-        messageOrder += "\nAdd chocolate? " + addChocolate;
-        messageOrder += "\nQuantity: " + quantity;
-        messageOrder += "\nTotal: $" + priceOrder;
-        messageOrder += "\nThank you!";
+        String messageOrder = getString(R.string.order_summary_name, name);
+        messageOrder += "\n" + getString(R.string.order_summary_whipped_cream, addWhippedCream);
+        messageOrder += "\n" + getString(R.string.order_summary_chocolate, addChocolate);
+        messageOrder += "\n" + getString(R.string.order_summary_quantity, quantity);
+        messageOrder += "\n" + getString(R.string.order_summary_price, NumberFormat.getCurrencyInstance().format(priceOrder));
+        messageOrder += "\n" + getString(R.string.thank_you);
 
         return messageOrder;
     }
